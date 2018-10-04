@@ -184,12 +184,14 @@ dev.off()
 
 ## Ordinations 
 ## Make constrained ordination 
-ccaMatrix = vegan::rda(specTable, envData)
+# rda = Redundancy analyis 
+rdaMatrix = vegan::rda(specTable, envData)
+# Observe loadings and asssociated data
+summary(ccaMatrix)
 plot(ccaMatrix)
 ## Make permutation test
 anova(ccaMatrix)
-# Observe loadings and asssociated data
-summary(ccaMatrix)
+
 
 ## What if we transform the abundance data so we can see variations better. 
 # Logarithm (check Log1p function)
@@ -197,16 +199,14 @@ specTableLog = log1p(specTable)
 ## Make constrained ordination 
 ccaMatrix2 = vegan::rda(specTableLog, envData)
 plot(ccaMatrix2)
-anova(ccaMatrix2)
 summary(ccaMatrix2)
+anova(ccaMatrix2)
 
 
 # erasing the p13 
 
 envData2 = envData2[!rownames(envData2) == "p13",]
 specTable2 = specTable[!rownames(specTable) == "p13",]
-
-
 ccaMatrix3 = vegan::rda(log1p(specTable2), envData2)
 plot(ccaMatrix3)
 anova(ccaMatrix3)
